@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Python Voting System</title>
+    <link rel="stylesheet" href="static/S4_vote.css">
+  </head>
+  <body>
+    <form method="post" class="poll-docket">
+      <!-- (A) QUESTION -->
+      <div class="poll-question">{{ q }}</div>
+
+      <!-- (B) OPTIONS -->
+      {% for oid, txt in o.items() %}
+      <label class="poll-option">
+        <input type="radio" name="vote" value="{{ oid }}" required
+        {% if session["vote"][qid] is defined and oid==session["vote"][qid] %}
+         checked
+        {% endif %}>
+        <span class="poll-text">{{txt}}</span>
+        <span class="poll-votes">({{v[oid]}})</span>
+      </label>
+      {% endfor %}
+
+      <!-- (C) SUBMIT -->
+      <input type="submit" class="poll-go" value="Go!">
+    </form>
+  </body>
+</html>
